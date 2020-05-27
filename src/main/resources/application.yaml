@@ -1,0 +1,51 @@
+quarkus:
+  datasource:
+    db-kind: postgresql
+    username: noty
+    password: noty
+    jdbc:
+      url: jdbc:postgresql://localhost:5432/noty
+  hibernate-orm:
+    database:
+      generation: update
+      #update
+  swagger-ui:
+    always-include: true
+  security:
+    users:
+      embedded:
+        enabled: true
+        realm-name: noty
+        plain-text: true
+        users:
+          # build time configuration property, not evaluated at runtime:
+          noty: ${BASICAUTH_PASSWORD:12345}
+        roles:
+          noty: notyRole
+  http:
+    auth:
+      basic: true
+
+"%test":
+  quarkus:
+    datasource:
+      db-kind: postgresql
+      username: postgres
+      password: postgres
+      jdbc:
+        url: jdbc:postgresql://localhost:5999/postgres
+  hibernate-orm:
+    database:
+      generation: create-drop
+
+"%db-in-docker":
+  quarkus:
+    datasource:
+      db-kind: postgresql
+      username: noty
+      password: noty
+      jdbc:
+        url: jdbc:postgresql://docker-postgres:5432/noty
+  hibernate-orm:
+    database:
+      generation: update
