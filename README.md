@@ -13,10 +13,10 @@ You can run your application in dev mode that enables live coding using:
 ## Testing in Java Virtual Machine mode
 
 ```
-./mvnw -Ptest clean verify
+./mvnw -Ptest -Dquarkus.profile=db-in-docker clean verify
 ```
 
-## Testing the native executable
+## Testing the native executable 
 
 ```
 ./mvnw -Pnative clean verify
@@ -40,7 +40,7 @@ java -jar target/noty-server-quarkus-1.0-SNAPSHOT-runner.jar
 
 You can create a native executable using: 
 ```
-./mvnw package -DskipTests -DBASICAUTH_PASSWORD=123 -Dquarkus.profile=db-in-docker -Pnative
+./mvnw package -DskipTests -DBASICAUTH_PASSWORD=123 -Pnative
 ```
 
 You can then execute your native executable with: 
