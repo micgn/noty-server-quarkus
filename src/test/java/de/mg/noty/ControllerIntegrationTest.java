@@ -3,6 +3,7 @@ package de.mg.noty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.mg.noty.controller.content.NoteDto;
+import de.mg.noty.controller.delta.req.AllContentDto;
 import de.mg.noty.controller.delta.req.NoteDeltaDto;
 import de.mg.noty.controller.delta.req.NoteTagDeltaDto;
 import de.mg.noty.controller.delta.req.TagDeltaDto;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import javax.ws.rs.core.MediaType;
 
 import static io.restassured.RestAssured.given;
+import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -84,6 +86,21 @@ public class ControllerIntegrationTest {
                 .statusCode(200)
                 .extract().as(NoteDto[].class);
         assertTrue(notesResponse != null && notesResponse.length == 1);
+
+        given()
+                .auth().preemptive().basic("noty", password)
+                .queryParam("lastReceivedServerDelta", 2)
+                .body(json(AllContentDto.builder()
+                        .noteCreateDeltas(singletonList(NoteDeltaDto.builder()
+                                .noteId("111")
+                                .text("test")
+                                .updated(10L)
+                                .build()))
+                        .build()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .when().post("/delta/all")
+                .then()
+                .statusCode(204);
     }
 
     private String json(Object o) {

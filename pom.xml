@@ -146,7 +146,7 @@
     </build>
     <profiles>
         <profile>
-            <id>test</id>
+            <id>db-in-docker</id>
             <build>
                 <plugins>
                     <plugin>

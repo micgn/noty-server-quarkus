@@ -13,7 +13,7 @@ You can run your application in dev mode that enables live coding using:
 ## Testing in Java Virtual Machine mode
 
 ```
-./mvnw -Ptest -Dquarkus.profile=db-in-docker clean verify
+./mvnw -Pdb-in-docker clean verify
 ```
 
 ## Testing the native executable 
@@ -21,9 +21,10 @@ You can run your application in dev mode that enables live coding using:
 ```
 ./mvnw -Pnative clean verify
 ```
+runs against a local Postgres DB on 5432...
 
 ## Packaging and running the application
-
+ 
 The application can be packaged using 
 ```
 ./mvnw -DBASICAUTH_PASSWORD=123 -DskipTests package

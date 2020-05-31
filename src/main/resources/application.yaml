@@ -8,7 +8,6 @@ quarkus:
   hibernate-orm:
     database:
       generation: update
-      #update
   swagger-ui:
     always-include: true
   security:
@@ -37,15 +36,3 @@ quarkus:
   hibernate-orm:
     database:
       generation: create-drop
-
-"%db-in-docker":
-  quarkus:
-    datasource:
-      db-kind: postgresql
-      username: noty
-      password: noty
-      jdbc:
-        url: jdbc:postgresql://docker-postgres:5432/noty
-  hibernate-orm:
-    database:
-      generation: update
