@@ -1,0 +1,2 @@
+# set datasource host to the right docker-compose network host:
+./mvnw clean package -DskipTests -DBASICAUTH_PASSWORD=123 -Dquarkus.datasource.jdbc.url=jdbc:postgresql://postgres:5432/noty -Pnative

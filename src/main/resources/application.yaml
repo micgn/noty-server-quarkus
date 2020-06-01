@@ -10,6 +10,7 @@ quarkus:
       generation: update
   swagger-ui:
     always-include: true
+    path: /swagger-ui.html
   security:
     users:
       embedded:
@@ -22,8 +23,10 @@ quarkus:
         roles:
           noty: notyRole
   http:
+    root-path: /noty-server
     auth:
       basic: true
+
 
 "%test":
   quarkus:
